@@ -48,4 +48,16 @@ dependencies {
     implementation "androidx.room:room-rxjava2:${versions.room}"
     implementation "androidx.room:room-guava:${versions.room}"
     testImplementation "androidx.room:room-testing:${versions.room}"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycleViewmodelKtx}"
+
+    // Koin
+    implementation "org.koin:koin-android:${versions.koin}"
+    implementation "org.koin:koin-androidx-scope:${versions.koin}"
+    implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
 }
