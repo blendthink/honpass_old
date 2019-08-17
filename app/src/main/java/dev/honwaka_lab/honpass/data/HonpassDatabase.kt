@@ -1,8 +1,6 @@
 package dev.honwaka_lab.honpass.data
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import dev.honwaka_lab.honpass.data.dao.AccountDao
 import dev.honwaka_lab.honpass.data.dao.AdminDao
@@ -26,22 +24,4 @@ internal abstract class HonpassDatabase : RoomDatabase() {
     abstract fun adminDao(): AdminDao
 
     abstract fun categoryDao(): CategoryDao
-
-    companion object {
-
-        @Volatile
-        private var INSTANCE: HonpassDatabase? = null
-
-        fun getInstance(context: Context): HonpassDatabase =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
-            }
-
-        private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(
-                context.applicationContext,
-                HonpassDatabase::class.java,
-                "honpass.db"
-            ).build()
-    }
 }
