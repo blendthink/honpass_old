@@ -10,9 +10,9 @@ import io.reactivex.Single
 @Dao
 internal interface AdminDao {
 
-    @Query("SELECT * FROM admins WHERE name = :name AND password = :password")
-    suspend fun find(name: String, password: String): Single<Admin>
-
     @Insert
     suspend fun insert(admin: Admin): Completable
+
+    @Query("SELECT * FROM admins WHERE name = :name AND password = :password")
+    suspend fun find(name: String, password: String): Single<Admin>
 }

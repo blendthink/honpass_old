@@ -11,11 +11,11 @@ import io.reactivex.Completable
 @Dao
 internal interface CategoryDao {
 
-    @Query("SELECT * FROM categories ORDER BY name ASC")
-    suspend fun getAll(): LiveData<List<Category>>
-
     @Insert
     suspend fun insert(category: Category): Completable
+
+    @Query("SELECT * FROM categories ORDER BY name ASC")
+    suspend fun getAll(): LiveData<List<Category>>
 
     @Delete
     suspend fun delete(category: Category): Completable

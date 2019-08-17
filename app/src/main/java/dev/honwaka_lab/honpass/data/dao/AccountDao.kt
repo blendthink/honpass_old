@@ -11,11 +11,11 @@ import io.reactivex.Completable
 @Dao
 internal interface AccountDao {
 
-    @Query("SELECT * FROM accounts ORDER BY name ASC")
-    suspend fun getAll(): LiveData<List<Account>>
-
     @Insert
     suspend fun insert(account: Account): Completable
+
+    @Query("SELECT * FROM accounts ORDER BY name ASC")
+    suspend fun getAll(): LiveData<List<Account>>
 
     @Delete
     suspend fun delete(account: Account): Completable
