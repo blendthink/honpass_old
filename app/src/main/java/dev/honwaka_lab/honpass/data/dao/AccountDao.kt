@@ -6,17 +6,16 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import dev.honwaka_lab.honpass.data.entities.Account
-import io.reactivex.Completable
 
 @Dao
 internal interface AccountDao {
 
     @Insert
-    suspend fun insert(account: Account): Completable
+    suspend fun insert(account: Account)
 
     @Query("SELECT * FROM accounts ORDER BY name ASC")
     suspend fun getAll(): LiveData<List<Account>>
 
     @Delete
-    suspend fun delete(account: Account): Completable
+    suspend fun delete(account: Account)
 }
