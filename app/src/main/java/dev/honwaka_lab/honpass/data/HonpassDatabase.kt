@@ -15,7 +15,8 @@ import dev.honwaka_lab.honpass.data.entities.Category
         Admin::class,
         Category::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 internal abstract class HonpassDatabase : RoomDatabase() {
 
