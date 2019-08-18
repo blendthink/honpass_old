@@ -1,6 +1,5 @@
 package dev.honwaka_lab.honpass.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -13,5 +12,5 @@ internal interface AdminDao {
     suspend fun insert(admin: Admin)
 
     @Query("SELECT * FROM admins WHERE name = :name AND password = :password")
-    suspend fun find(name: String, password: String): LiveData<Admin>
+    suspend fun find(name: String, password: String): Admin
 }

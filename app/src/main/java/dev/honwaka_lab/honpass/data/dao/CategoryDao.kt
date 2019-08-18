@@ -1,6 +1,5 @@
 package dev.honwaka_lab.honpass.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import dev.honwaka_lab.honpass.data.entities.Category
 
@@ -11,7 +10,7 @@ internal interface CategoryDao {
     suspend fun insert(category: Category)
 
     @Query("SELECT * FROM categories ORDER BY name ASC")
-    suspend fun getAll(): LiveData<List<Category>>
+    suspend fun getAll(): List<Category>
 
     @Update
     suspend fun update(category: Category)

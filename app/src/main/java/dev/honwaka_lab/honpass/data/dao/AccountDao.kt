@@ -1,6 +1,5 @@
 package dev.honwaka_lab.honpass.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import dev.honwaka_lab.honpass.data.entities.Account
 
@@ -11,7 +10,7 @@ internal interface AccountDao {
     suspend fun insert(account: Account)
 
     @Query("SELECT * FROM accounts ORDER BY name ASC")
-    suspend fun getAll(): LiveData<List<Account>>
+    suspend fun getAll(): List<Account>
 
     @Update
     suspend fun update(account: Account)
