@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/appColor</color>
-    <color name="colorPrimaryDark">#004CD1</color>
-    <color name="colorAccent">#F79824</color>
 
-    <color name="windowBackground">#FFFEFF</color>
+    <!--アプリの基本色-->
+    <color name="appMainColor">#0078FF</color>
+    <color name="appDarkMainColor">#004CD1</color>
+    <color name="appAccentColor">#F79824</color>
+    <color name="appBackgroundColor">#FFFEFF</color>
+    <color name="appTextColor">#31393C</color>
 
-    <color name="appColor">#0078FF</color>
+    <color name="colorPrimary">@color/appMainColor</color>
+    <color name="colorPrimaryDark">@color/appDarkMainColor</color>
+    <color name="colorAccent">@color/appAccentColor</color>
+
+    <color name="windowBackground">@color/appBackgroundColor</color>
+
 </resources>

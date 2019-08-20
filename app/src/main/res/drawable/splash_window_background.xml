@@ -2,7 +2,7 @@
 <layer-list
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/appColor"/>
+    <item android:drawable="@color/appMainColor"/>
 
     <item
         android:gravity="center"
