@@ -8,4 +8,96 @@
     tools:context=".ui.register.RegisterActivity"
     >
 
+    <TextView
+        android:id="@+id/splash_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="はじめにパスワードを設定してください。"
+        android:textColor="@color/appColor"
+        android:textSize="16sp"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/splash_password"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/splash_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:counterTextAppearance="@style/CounterText"
+        app:counterOverflowTextAppearance="@style/CounterOverflowText"
+        app:counterEnabled="true"
+        app:counterMaxLength="24"
+        android:hint="パスワード"
+        android:textColorHint="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/splash_confirm_password"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorAccent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:imeOptions="actionNext"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/splash_confirm_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="24"
+        app:counterTextAppearance="@style/CounterText"
+        app:counterOverflowTextAppearance="@style/CounterOverflowText"
+        android:hint="パスワード(確認)"
+        android:textColorHint="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/splash_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorAccent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:imeOptions="actionNext"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="設定する"
+        android:paddingHorizontal="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/splash_confirm_password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
