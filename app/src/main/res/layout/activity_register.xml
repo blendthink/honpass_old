@@ -9,7 +9,6 @@
     >
 
     <TextView
-        android:id="@+id/splash_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="はじめにパスワードを設定してください。"
@@ -20,25 +19,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/splash_password"
+        app:layout_constraintBottom_toTopOf="@id/register_password"
         />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:id="@+id/splash_password"
+        android:id="@+id/register_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
+        android:hint="パスワード"
+        android:textColorHint="?android:textColorPrimary"
         app:counterTextAppearance="@style/CounterText"
         app:counterOverflowTextAppearance="@style/CounterOverflowText"
         app:counterEnabled="true"
-        app:counterMaxLength="6"
-        android:hint="パスワード"
-        android:textColorHint="?android:textColorPrimary"
+        app:counterMaxLength="36"
+        app:errorEnabled="true"
+        app:boxBackgroundColor="#EAF6FF"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/splash_confirm_password"
+        app:layout_constraintBottom_toTopOf="@id/register_confirm_password"
         app:layout_constraintVertical_chainStyle="packed"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/colorAccent"
@@ -58,21 +59,22 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:id="@+id/splash_confirm_password"
+        android:id="@+id/register_confirm_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginHorizontal="16dp"
+        android:textColorHint="?android:textColorPrimary"
         app:counterEnabled="true"
-        app:counterMaxLength="6"
+        app:counterMaxLength="36"
         app:counterTextAppearance="@style/CounterText"
         app:counterOverflowTextAppearance="@style/CounterOverflowText"
         android:hint="パスワード(確認)"
-        android:textColorHint="?android:textColorPrimary"
-        app:layout_constraintTop_toBottomOf="@id/splash_password"
+        app:boxBackgroundColor="#EAF6FF"
+        app:layout_constraintTop_toBottomOf="@id/register_password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/register_submit"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/colorAccent"
         >
@@ -90,13 +92,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/register_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="設定する"
+        android:textColor="@android:color/white"
         android:paddingHorizontal="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/splash_confirm_password"
+        app:layout_constraintTop_toBottomOf="@id/register_confirm_password"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
