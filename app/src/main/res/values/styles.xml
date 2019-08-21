@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:textColorPrimary">@color/appTextColor</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.NoActionBar">
