@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.databinding.ActivityRegisterBinding
 import kotlinx.android.synthetic.main.activity_register.*
@@ -22,7 +24,26 @@ internal class RegisterActivity : AppCompatActivity() {
         DataBindingUtil.setContentView<ActivityRegisterBinding>(
             this, R.layout.activity_register
         ).apply {
-            viewModel = RegisterViewModel(application)
+            viewModel = RegisterViewModel(application).apply {
+
+                password.observe(this@RegisterActivity,
+                    Observer<String> {
+                        Toast.makeText(this@RegisterActivity, it, Toast.LENGTH_LONG).show()
+                    }
+                )
+
+                passwordForConfirm.observe(this@RegisterActivity,
+
+                    Observer<String> {
+
+                        if (password.value == passwordForConfirm.value) {
+                            Toast.makeText(this@RegisterActivity, "同じ", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(this@RegisterActivity, "違う", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                )
+            }
         }
     }
 
