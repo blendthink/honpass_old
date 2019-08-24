@@ -111,7 +111,7 @@
             android:id="@+id/register_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="submit"
+            android:onClick="@{(view) -> viewModel.submit()}"
             android:paddingHorizontal="24dp"
             android:text="設定する"
             android:textColor="@android:color/white"

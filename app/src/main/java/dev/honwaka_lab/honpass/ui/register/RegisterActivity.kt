@@ -7,8 +7,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import dev.honwaka_lab.honpass.R
-import dev.honwaka_lab.honpass.data.dao.AdminDao
-import dev.honwaka_lab.honpass.data.repositories.AdminRepository
 import dev.honwaka_lab.honpass.databinding.ActivityRegisterBinding
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -24,12 +22,8 @@ internal class RegisterActivity : AppCompatActivity() {
         DataBindingUtil.setContentView<ActivityRegisterBinding>(
             this, R.layout.activity_register
         ).apply {
-//            viewModel = RegisterViewModel()
+            viewModel = RegisterViewModel(application)
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     fun clickScreen(view: View) {
