@@ -11,7 +11,7 @@ internal class HonpassApp : Application() {
 
         startKoin(
             androidContext = applicationContext,
-            modules = listOf(KoinModule.appModule())
+            modules = listOf(KoinModule.appModule(), KoinModule.registerModule())
         )
     }
 }

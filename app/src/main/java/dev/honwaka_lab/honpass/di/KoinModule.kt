@@ -2,7 +2,10 @@ package dev.honwaka_lab.honpass.di
 
 import androidx.room.Room
 import dev.honwaka_lab.honpass.data.HonpassDatabase
+import dev.honwaka_lab.honpass.data.repositories.AdminRepository
+import dev.honwaka_lab.honpass.ui.register.RegisterViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
 internal object KoinModule {
@@ -15,6 +18,21 @@ internal object KoinModule {
                 HonpassDatabase::class.java,
                 "honpass.db"
             ).build()
+        }
+    }
+
+    fun registerModule() = module {
+
+        factory {
+            get<HonpassDatabase>().adminDao()
+        }
+
+        viewModel {
+            RegisterViewModel(get())
+        }
+
+        single {
+            AdminRepository(get())
         }
     }
 }

@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.databinding.DataBindingUtil
 import dev.honwaka_lab.honpass.R
+import dev.honwaka_lab.honpass.data.dao.AdminDao
+import dev.honwaka_lab.honpass.data.repositories.AdminRepository
+import dev.honwaka_lab.honpass.databinding.ActivityRegisterBinding
 import kotlinx.android.synthetic.main.activity_register.*
 
 internal class RegisterActivity : AppCompatActivity() {
@@ -16,7 +20,16 @@ internal class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+
+        DataBindingUtil.setContentView<ActivityRegisterBinding>(
+            this, R.layout.activity_register
+        ).apply {
+//            viewModel = RegisterViewModel()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 
     fun clickScreen(view: View) {
