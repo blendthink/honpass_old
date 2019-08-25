@@ -1,24 +1,19 @@
 package dev.honwaka_lab.honpass.ui.register
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.databinding.ActivityRegisterBinding
-import kotlinx.android.synthetic.main.activity_register.*
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 internal class RegisterActivity : AppCompatActivity() {
 
-    private val registerViewModel by inject<RegisterViewModel>()
-
-    private val inputMethodManager: InputMethodManager by lazy {
-        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    private val registerViewModel by inject<RegisterViewModel> {
+        parametersOf(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,31 +44,5 @@ internal class RegisterActivity : AppCompatActivity() {
                 )
             }
         }
-    }
-
-    fun clickScreen(view: View) {
-
-        clearFocus(view)
-
-        hideKeyboard()
-    }
-
-    fun submit(view: View) {
-
-        clearFocus(view)
-
-        hideKeyboard()
-    }
-
-    private fun clearFocus(view: View) {
-
-        view.requestFocus()
-
-        register_password.clearFocus()
-        register_confirm_password.clearFocus()
-    }
-
-    private fun hideKeyboard() {
-        inputMethodManager.hideSoftInputFromWindow(window.decorView.windowToken, 0)
     }
 }

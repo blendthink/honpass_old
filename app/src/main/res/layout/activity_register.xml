@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
-        android:onClick="clickScreen"
+        android:onClick="@{(view) -> viewModel.clickScreen(view)}"
         tools:context=".ui.register.RegisterActivity"
         >
 
@@ -111,7 +111,7 @@
             android:id="@+id/register_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{(view) -> viewModel.submit()}"
+            android:onClick="@{(view) -> viewModel.submit(view)}"
             android:paddingHorizontal="24dp"
             android:text="設定する"
             android:textColor="@android:color/white"
