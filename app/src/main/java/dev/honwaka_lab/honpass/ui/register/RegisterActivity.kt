@@ -11,8 +11,11 @@ import androidx.lifecycle.Observer
 import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.databinding.ActivityRegisterBinding
 import kotlinx.android.synthetic.main.activity_register.*
+import org.koin.android.ext.android.inject
 
 internal class RegisterActivity : AppCompatActivity() {
+
+    private val registerViewModel by inject<RegisterViewModel>()
 
     private val inputMethodManager: InputMethodManager by lazy {
         getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -24,7 +27,8 @@ internal class RegisterActivity : AppCompatActivity() {
         DataBindingUtil.setContentView<ActivityRegisterBinding>(
             this, R.layout.activity_register
         ).apply {
-            viewModel = RegisterViewModel(application).apply {
+
+            viewModel = registerViewModel.apply {
 
                 password.observe(this@RegisterActivity,
                     Observer<String> {
