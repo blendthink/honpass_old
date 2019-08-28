@@ -17,11 +17,16 @@ internal class RegisterViewModel(
     val password = MutableLiveData<String>()
     val passwordForConfirm = MutableLiveData<String>()
 
-    val enabledSubmitButton: LiveData<Boolean> = Transformations.map(password) {
+    val enabledSubmitButton = MediatorLiveData<Boolean>()
 
-        val length = it?.length ?: 0
+    init {
 
-        return@map length % 2 != 0
+        val observerEnabledSubmitButton = Observer<String> {
+            enabledSubmitButton.value = canSubmit()
+        }
+
+        enabledSubmitButton.addSource(password, observerEnabledSubmitButton)
+        enabledSubmitButton.addSource(passwordForConfirm, observerEnabledSubmitButton)
     }
 
     fun submit(view: View) {
@@ -53,7 +58,7 @@ internal class RegisterViewModel(
 
         val length = passwordValue.length
 
-        if (length !in 6..32) {
+        if (length !in 6..36) {
             return false
         }
 
