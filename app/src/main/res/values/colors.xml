@@ -11,6 +11,7 @@
     <color name="colorPrimary">@color/appMainColor</color>
     <color name="colorPrimaryDark">@color/appDarkMainColor</color>
     <color name="colorAccent">@color/appMainColor</color>
+    <color name="colorOnSurface">@color/appMainColor</color>
 
     <color name="windowBackground">@color/appBackgroundColor</color>
 

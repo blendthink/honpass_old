@@ -14,8 +14,23 @@ internal class RegisterViewModel(
     private val inputMethodManager =
         activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-    var password = MutableLiveData<String>()
-    var passwordForConfirm = MutableLiveData<String>()
+    val password = MutableLiveData<String>()
+    val passwordForConfirm = MutableLiveData<String>()
+
+    private val _enabledSubmitButton = MutableLiveData<Boolean>()
+    val enabledSubmitButton: LiveData<Boolean> = _enabledSubmitButton
+
+    init {
+
+        password.value = ""
+        passwordForConfirm.value = ""
+
+        _enabledSubmitButton.value = false
+    }
+
+    fun changeSubmitEnabled() {
+        _enabledSubmitButton.value = canSubmit()
+    }
 
     fun submit(view: View) {
 
@@ -38,6 +53,23 @@ internal class RegisterViewModel(
         clearFocus(view)
 
         hideKeyboard(view)
+    }
+
+    private fun canSubmit(): Boolean {
+
+        val passwordValue = password.value ?: return false
+
+        val length = passwordValue.length
+
+        if (length !in 6..32) {
+            return false
+        }
+
+        if (password.value != passwordForConfirm.value) {
+            return false
+        }
+
+        return true
     }
 
     private fun clearFocus(view: View) {

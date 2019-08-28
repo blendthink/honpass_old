@@ -25,23 +25,20 @@ internal class RegisterActivity : AppCompatActivity() {
 
             viewModel = registerViewModel.apply {
 
-                password.observe(this@RegisterActivity,
-                    Observer<String> {
-                        Toast.makeText(this@RegisterActivity, it, Toast.LENGTH_LONG).show()
-                    }
-                )
+                password.observe(this@RegisterActivity, Observer {
 
-                passwordForConfirm.observe(this@RegisterActivity,
+                    changeSubmitEnabled()
+                })
 
-                    Observer<String> {
+                passwordForConfirm.observe(this@RegisterActivity, Observer {
 
-                        if (password.value == passwordForConfirm.value) {
-                            Toast.makeText(this@RegisterActivity, "同じ", Toast.LENGTH_LONG).show()
-                        } else {
-                            Toast.makeText(this@RegisterActivity, "違う", Toast.LENGTH_LONG).show()
-                        }
-                    }
-                )
+                    changeSubmitEnabled()
+                })
+
+                enabledSubmitButton.observe(this@RegisterActivity, Observer {
+
+                    Toast.makeText(this@RegisterActivity, "${enabledSubmitButton.value}", Toast.LENGTH_LONG).show()
+                })
             }
         }
     }
