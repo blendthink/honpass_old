@@ -45,13 +45,14 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "androidx.core:core-ktx:${versions.coreKtx}"
-    implementation "com.google.android.material:material:${versions.material}"
     implementation "androidx.annotation:annotation:${versions.annotation}"
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
+
+    // Material
+    implementation "com.google.android.material:material:${versions.material}"
+
+    // Lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycleExtensions}"
-    testImplementation "junit:junit:${versions.junit}"
-    androidTestImplementation "androidx.test:runner:${versions.runner}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espressoCore}"
 
     // Room
     implementation "androidx.room:room-runtime:${versions.room}"
@@ -64,11 +65,13 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
 
-    // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycleViewmodelKtx}"
-
     // Koin
     implementation "org.koin:koin-android:${versions.koin}"
     implementation "org.koin:koin-androidx-scope:${versions.koin}"
     implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
+
+    // Test
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test:runner:${versions.runner}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espressoCore}"
 }
