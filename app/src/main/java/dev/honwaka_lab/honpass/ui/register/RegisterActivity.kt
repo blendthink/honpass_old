@@ -23,17 +23,9 @@ internal class RegisterActivity : AppCompatActivity() {
             this, R.layout.activity_register
         ).apply {
 
+            lifecycleOwner = this@RegisterActivity
+
             viewModel = registerViewModel.apply {
-
-                password.observe(this@RegisterActivity, Observer {
-
-                    changeSubmitEnabled()
-                })
-
-                passwordForConfirm.observe(this@RegisterActivity, Observer {
-
-                    changeSubmitEnabled()
-                })
 
                 enabledSubmitButton.observe(this@RegisterActivity, Observer {
 

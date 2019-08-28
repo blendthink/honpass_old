@@ -17,19 +17,11 @@ internal class RegisterViewModel(
     val password = MutableLiveData<String>()
     val passwordForConfirm = MutableLiveData<String>()
 
-    private val _enabledSubmitButton = MutableLiveData<Boolean>()
-    val enabledSubmitButton: LiveData<Boolean> = _enabledSubmitButton
+    val enabledSubmitButton: LiveData<Boolean> = Transformations.map(password) {
 
-    init {
+        val length = it?.length ?: 0
 
-        password.value = ""
-        passwordForConfirm.value = ""
-
-        _enabledSubmitButton.value = false
-    }
-
-    fun changeSubmitEnabled() {
-        _enabledSubmitButton.value = canSubmit()
+        return@map length % 2 != 0
     }
 
     fun submit(view: View) {
