@@ -6,7 +6,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.*
+import dev.honwaka_lab.honpass.utils.HashUtil
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import java.security.SecureRandom
 
 internal class RegisterViewModel(
     private val activity: Activity
@@ -41,11 +43,11 @@ internal class RegisterViewModel(
             Toast.LENGTH_LONG
         ).show()
 
-        val passwordValue = password.value
+        val passwordValue = password.value ?: ""
 
-        val bcrypt = BCryptPasswordEncoder()
+        val hash = HashUtil.encode(passwordValue)
 
-        val hash = bcrypt.encode(passwordValue)
+        val result = HashUtil.match(passwordValue, hash)
 
         clearFocus(view)
 
