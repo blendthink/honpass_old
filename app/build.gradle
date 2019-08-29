@@ -35,6 +35,13 @@ android {
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
+    packagingOptions {
+        exclude 'META-INF/spring.tooling'
+        exclude 'META-INF/spring.handlers'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/spring.schemas'
+        exclude 'META-INF/notice.txt'
+    }
     dataBinding {
         enabled = true
     }
@@ -69,6 +76,9 @@ dependencies {
     implementation "org.koin:koin-android:${versions.koin}"
     implementation "org.koin:koin-androidx-scope:${versions.koin}"
     implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
+
+    // Spring Security
+    implementation "org.springframework.security:spring-security-core:${versions.springSecurityCore}"
 
     // Test
     testImplementation "junit:junit:${versions.junit}"

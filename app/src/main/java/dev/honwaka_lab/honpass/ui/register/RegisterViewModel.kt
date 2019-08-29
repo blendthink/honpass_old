@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.*
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 internal class RegisterViewModel(
     private val activity: Activity
@@ -39,6 +40,12 @@ internal class RegisterViewModel(
             "${password.value} : ${passwordForConfirm.value}",
             Toast.LENGTH_LONG
         ).show()
+
+        val passwordValue = password.value
+
+        val bcrypt = BCryptPasswordEncoder()
+
+        val hash = bcrypt.encode(passwordValue)
 
         clearFocus(view)
 
