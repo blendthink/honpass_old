@@ -7,8 +7,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.*
 import dev.honwaka_lab.honpass.utils.HashUtil
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import java.security.SecureRandom
 
 internal class RegisterViewModel(
     private val activity: Activity
@@ -21,6 +19,9 @@ internal class RegisterViewModel(
     val passwordForConfirm = MutableLiveData<String>()
 
     val enabledSubmitButton = MediatorLiveData<Boolean>()
+
+    private val _errorText = MutableLiveData<String?>()
+    val errorText: LiveData<String?> = _errorText
 
     init {
 
@@ -36,6 +37,8 @@ internal class RegisterViewModel(
 
         // TODO: 後々動的にする
         val name = "default"
+
+        _errorText.value = password.value
 
         Toast.makeText(
             activity,
