@@ -69,7 +69,9 @@
                 android:maxLines="1"
                 android:textSize="14sp"
                 android:text="@={viewModel.password}"
+                android:textSelectHandle="@drawable/text_select_handle_none"
                 android:longClickable="false"
+                app:enabledActionMode="@{false}"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -106,7 +108,9 @@
                 android:maxLines="1"
                 android:textSize="14sp"
                 android:text="@={viewModel.passwordForConfirm}"
+                android:textSelectHandle="@drawable/text_select_handle_none"
                 android:longClickable="false"
+                app:enabledActionMode="@{false}"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
