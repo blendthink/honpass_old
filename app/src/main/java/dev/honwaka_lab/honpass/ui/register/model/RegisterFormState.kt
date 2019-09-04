@@ -40,6 +40,8 @@ internal class RegisterFormState(
         passwordForConfirm: String?
     ): PasswordForConfirmError {
 
+        if (passwordError != PasswordError.NONE) return PasswordForConfirmError.PASSWORD_ERROR
+
         return if (password == passwordForConfirm) {
             PasswordForConfirmError.NONE
         } else {
