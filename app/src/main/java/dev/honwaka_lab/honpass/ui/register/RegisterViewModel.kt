@@ -26,7 +26,7 @@ internal class RegisterViewModel(
         formState.value = RegisterFormState()
 
         val observerFormState = Observer<String> {
-            formState.value = formState.value?.update(password.value, passwordForConfirm.value)
+            formState.value = RegisterFormState.newInstance(password.value, passwordForConfirm.value)
         }
 
         formState.addSource(password, observerFormState)
