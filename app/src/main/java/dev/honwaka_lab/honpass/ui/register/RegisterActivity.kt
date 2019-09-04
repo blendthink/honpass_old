@@ -2,9 +2,7 @@ package dev.honwaka_lab.honpass.ui.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.databinding.ActivityRegisterBinding
 import org.koin.android.ext.android.inject
@@ -25,13 +23,7 @@ internal class RegisterActivity : AppCompatActivity() {
 
             lifecycleOwner = this@RegisterActivity
 
-            viewModel = registerViewModel.apply {
-
-                enabledSubmitButton.observe(this@RegisterActivity, Observer {
-
-                    Toast.makeText(this@RegisterActivity, "${enabledSubmitButton.value}", Toast.LENGTH_LONG).show()
-                })
-            }
+            viewModel = registerViewModel
         }
     }
 }
