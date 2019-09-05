@@ -1,6 +1,5 @@
 package dev.honwaka_lab.honpass.ui.register
 
-import android.app.Activity
 import android.view.View
 import androidx.lifecycle.*
 import dev.honwaka_lab.honpass.convenience.Event
@@ -12,7 +11,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 internal class RegisterViewModel(
-    private val activity: Activity,
     private val adminRepository: AdminRepository
 ) : ViewModel() {
 

@@ -1,6 +1,5 @@
 package dev.honwaka_lab.honpass.di
 
-import android.app.Activity
 import androidx.room.Room
 import dev.honwaka_lab.honpass.data.HonpassDatabase
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
@@ -33,7 +32,7 @@ internal object KoinModule {
         }
 
         viewModel {
-            (activity: Activity) -> RegisterViewModel(activity, get())
+            RegisterViewModel(get())
         }
     }
 }

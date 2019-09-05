@@ -13,14 +13,11 @@ import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.databinding.ActivityRegisterBinding
 import dev.honwaka_lab.honpass.ui.login.LoginActivity
 import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
 import java.lang.Exception
 
 internal class RegisterActivity : AppCompatActivity() {
 
-    private val registerViewModel by inject<RegisterViewModel> {
-        parametersOf(this)
-    }
+    private val registerViewModel by inject<RegisterViewModel>()
 
     private lateinit var inputMethodManager: InputMethodManager
 
