@@ -1,5 +1,6 @@
 package dev.honwaka_lab.honpass.data
 
+import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.model.LoggedInUser
 
 /**

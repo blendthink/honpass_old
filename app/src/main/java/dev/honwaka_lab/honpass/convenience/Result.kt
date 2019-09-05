@@ -1,4 +1,4 @@
-package dev.honwaka_lab.honpass.data
+package dev.honwaka_lab.honpass.convenience
 
 /**
  * A generic class that holds a value with its loading status.

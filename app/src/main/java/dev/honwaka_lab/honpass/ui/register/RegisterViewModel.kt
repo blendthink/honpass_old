@@ -2,11 +2,10 @@ package dev.honwaka_lab.honpass.ui.register
 
 import android.app.Activity
 import android.content.Context
-import android.database.sqlite.SQLiteConstraintException
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.lifecycle.*
+import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
 import dev.honwaka_lab.honpass.ui.register.model.RegisterFormState
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +24,9 @@ internal class RegisterViewModel(
     val passwordForConfirm = MutableLiveData<String>()
 
     val formState = MediatorLiveData<RegisterFormState>()
+
+    private val _result = MutableLiveData<Result<Unit>>()
+    val result: LiveData<Result<Unit>> = _result
 
     init {
 
@@ -49,15 +51,8 @@ internal class RegisterViewModel(
 
         viewModelScope.launch {
 
-            try {
-
-                withContext(Dispatchers.IO) {
-                    adminRepository.register(passwordValue)
-                }
-
-            } catch (e: SQLiteConstraintException) {
-
-                Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
+            _result.value = withContext(Dispatchers.IO) {
+                adminRepository.register(passwordValue)
             }
         }
     }

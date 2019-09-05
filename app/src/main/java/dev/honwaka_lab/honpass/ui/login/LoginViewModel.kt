@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
 import dev.honwaka_lab.honpass.data.LoginRepository
-import dev.honwaka_lab.honpass.data.Result
+import dev.honwaka_lab.honpass.convenience.Result
 
 import dev.honwaka_lab.honpass.R
 

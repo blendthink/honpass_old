@@ -1,6 +1,8 @@
 package dev.honwaka_lab.honpass.data.repositories
 
+import android.database.sqlite.SQLiteConstraintException
 import android.util.Log
+import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.dao.AdminDao
 import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.utils.HashUtil
@@ -8,7 +10,7 @@ import java.util.*
 
 internal class AdminRepository(private val adminDao: AdminDao) {
 
-    suspend fun register(rawPassword: String) {
+    suspend fun register(rawPassword: String): Result<Unit> {
 
         val uniqueId = UUID.randomUUID().toString()
 
@@ -16,7 +18,16 @@ internal class AdminRepository(private val adminDao: AdminDao) {
 
         val admin = Admin(guid = uniqueId, password = password)
 
-        adminDao.insert(admin)
+        return try {
+
+            adminDao.insert(admin)
+
+            Result.Success(Unit)
+
+        } catch (e: SQLiteConstraintException) {
+
+            Result.Error(e)
+        }
     }
 
     suspend fun login(name: String = "default", rawPassword: String) {
