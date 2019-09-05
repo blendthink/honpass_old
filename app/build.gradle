@@ -59,7 +59,8 @@ dependencies {
     implementation "com.google.android.material:material:${versions.material}"
 
     // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycleExtensions}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
 
     // Room
     implementation "androidx.room:room-runtime:${versions.room}"
