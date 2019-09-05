@@ -1,10 +1,9 @@
 package dev.honwaka_lab.honpass.ui.register
 
 import android.app.Activity
-import android.content.Context
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.*
+import dev.honwaka_lab.honpass.convenience.Event
 import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
 import dev.honwaka_lab.honpass.ui.register.model.RegisterFormState
@@ -17,9 +16,6 @@ internal class RegisterViewModel(
     private val adminRepository: AdminRepository
 ) : ViewModel() {
 
-    private val inputMethodManager =
-        activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
     val password = MutableLiveData<String>()
     val passwordForConfirm = MutableLiveData<String>()
 
@@ -27,6 +23,12 @@ internal class RegisterViewModel(
 
     private val _result = MutableLiveData<Result<Unit>>()
     val result: LiveData<Result<Unit>> = _result
+
+    private val _hideKeyboardEvent = MutableLiveData<Event<Unit>>()
+    val hideKeyboardEvent: LiveData<Event<Unit>> = _hideKeyboardEvent
+
+    private val _clearFocusEvent = MutableLiveData<Event<Unit>>()
+    val clearFocusEvent: LiveData<Event<Unit>> = _clearFocusEvent
 
     init {
 
@@ -44,7 +46,7 @@ internal class RegisterViewModel(
 
         clearFocus(view)
 
-        hideKeyboard(view)
+        hideKeyboard()
 
         val passwordValue = password.value
             ?: throw RuntimeException("入力ミスを防げていません")
@@ -61,17 +63,17 @@ internal class RegisterViewModel(
 
         clearFocus(view)
 
-        hideKeyboard(view)
+        hideKeyboard()
     }
 
     private fun clearFocus(view: View) {
 
         view.requestFocus()
 
-        activity.currentFocus?.clearFocus()
+        _clearFocusEvent.value = Event(Unit)
     }
 
-    private fun hideKeyboard(view: View) {
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    private fun hideKeyboard() {
+        _hideKeyboardEvent.value = Event(Unit)
     }
 }

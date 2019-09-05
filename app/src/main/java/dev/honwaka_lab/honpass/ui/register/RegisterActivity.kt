@@ -1,8 +1,10 @@
 package dev.honwaka_lab.honpass.ui.register
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -20,8 +22,12 @@ internal class RegisterActivity : AppCompatActivity() {
         parametersOf(this)
     }
 
+    private lateinit var inputMethodManager: InputMethodManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         DataBindingUtil.setContentView<ActivityRegisterBinding>(
             this, R.layout.activity_register
@@ -44,6 +50,14 @@ internal class RegisterActivity : AppCompatActivity() {
                         }
                     }
                 })
+
+                clearFocusEvent.observe(this@RegisterActivity, Observer {
+                    clearFocus()
+                })
+
+                hideKeyboardEvent.observe(this@RegisterActivity, Observer {
+                    hideKeyboard()
+                })
             }
         }
     }
@@ -56,5 +70,13 @@ internal class RegisterActivity : AppCompatActivity() {
 
     private fun failToRegister(e: Exception) {
         Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun clearFocus() {
+        currentFocus?.clearFocus()
+    }
+
+    private fun hideKeyboard() {
+        inputMethodManager.hideSoftInputFromWindow(window.decorView.windowToken, 0)
     }
 }
