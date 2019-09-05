@@ -28,12 +28,12 @@ internal object KoinModule {
             get<HonpassDatabase>().adminDao()
         }
 
-        viewModel {
-            (activity: Activity) -> RegisterViewModel(activity)
-        }
-
         single {
             AdminRepository(get())
+        }
+
+        viewModel {
+            (activity: Activity) -> RegisterViewModel(activity, get())
         }
     }
 }

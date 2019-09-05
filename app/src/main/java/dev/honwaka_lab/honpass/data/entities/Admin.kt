@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "admins",
     indices = [
-        Index(name = "index_admins_name_password", value = ["name", "password"])
+        Index(name = "index_admins_name_password", value = ["name"], unique = true)
     ]
 )
 internal data class Admin (

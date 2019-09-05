@@ -4,13 +4,16 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.lifecycle.*
+import dev.honwaka_lab.honpass.data.repositories.AdminRepository
 import dev.honwaka_lab.honpass.ui.register.model.RegisterFormState
-import dev.honwaka_lab.honpass.utils.HashUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 internal class RegisterViewModel(
-    private val activity: Activity
+    private val activity: Activity,
+    private val adminRepository: AdminRepository
 ) : ViewModel() {
 
     private val inputMethodManager =
@@ -35,24 +38,23 @@ internal class RegisterViewModel(
 
     fun submit(view: View) {
 
-        // TODO: 後々動的にする
-        val name = "default"
-
-        Toast.makeText(
-            activity,
-            "${password.value} : ${passwordForConfirm.value}",
-            Toast.LENGTH_LONG
-        ).show()
-
-        val passwordValue = password.value ?: ""
-
-        val hash = HashUtil.encode(passwordValue)
-
-        val result = HashUtil.match(passwordValue, hash)
-
         clearFocus(view)
 
         hideKeyboard(view)
+
+        val passwordValue = password.value
+            ?: throw RuntimeException("入力ミスを防げていません")
+
+        viewModelScope.launch {
+
+            withContext(Dispatchers.IO) {
+                adminRepository.register(passwordValue)
+            }
+
+            withContext(Dispatchers.IO) {
+                adminRepository.login(rawPassword = passwordValue)
+            }
+        }
     }
 
     fun clickScreen(view: View) {

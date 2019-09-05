@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8e04f9d376a36bade5fe0446eede6f37",
+    "identityHash": "9dec642bb3a734cc09ce483f132d0f04",
     "entities": [
       {
         "tableName": "accounts",
@@ -132,12 +132,11 @@
         "indices": [
           {
             "name": "index_admins_name_password",
-            "unique": false,
+            "unique": true,
             "columnNames": [
-              "name",
-              "password"
+              "name"
             ],
-            "createSql": "CREATE  INDEX `index_admins_name_password` ON `${TABLE_NAME}` (`name`, `password`)"
+            "createSql": "CREATE UNIQUE INDEX `index_admins_name_password` ON `${TABLE_NAME}` (`name`)"
           }
         ],
         "foreignKeys": []
@@ -187,7 +186,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8e04f9d376a36bade5fe0446eede6f37')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9dec642bb3a734cc09ce483f132d0f04')"
     ]
   }
 }
