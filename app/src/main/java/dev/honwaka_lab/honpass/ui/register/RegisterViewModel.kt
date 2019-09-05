@@ -2,8 +2,10 @@ package dev.honwaka_lab.honpass.ui.register
 
 import android.app.Activity
 import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.lifecycle.*
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
 import dev.honwaka_lab.honpass.ui.register.model.RegisterFormState
@@ -47,12 +49,15 @@ internal class RegisterViewModel(
 
         viewModelScope.launch {
 
-            withContext(Dispatchers.IO) {
-                adminRepository.register(passwordValue)
-            }
+            try {
 
-            withContext(Dispatchers.IO) {
-                adminRepository.login(rawPassword = passwordValue)
+                withContext(Dispatchers.IO) {
+                    adminRepository.register(passwordValue)
+                }
+
+            } catch (e: SQLiteConstraintException) {
+
+                Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
             }
         }
     }
