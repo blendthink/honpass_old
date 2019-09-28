@@ -51,7 +51,7 @@ internal class AdminRepository(private val adminDao: AdminDao) {
         }
     }
 
-    suspend fun isRegistered(name: String = "default"): Result<Unit> {
+    suspend fun isRegistered(name: String = "default"): Result<Boolean> {
 
         val admin = try {
             adminDao.find(name)
@@ -59,8 +59,8 @@ internal class AdminRepository(private val adminDao: AdminDao) {
             return Result.Error(e)
         }
 
-        admin ?: return Result.Error(Exception("$name は登録されていません"))
+        admin ?: return Result.Success(false)
 
-        return Result.Success(Unit)
+        return Result.Success(true)
     }
 }

@@ -5,10 +5,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import dev.honwaka_lab.honpass.R
+import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.databinding.ActivitySplashBinding
+import dev.honwaka_lab.honpass.ui.login.LoginActivity
+import dev.honwaka_lab.honpass.ui.register.RegisterActivity
 import org.koin.android.ext.android.inject
 
 internal class SplashActivity : AppCompatActivity() {
@@ -26,24 +30,38 @@ internal class SplashActivity : AppCompatActivity() {
 
             viewModel = splashViewModel.apply {
 
-                openActivityEvent.observe(this@SplashActivity, Observer {
+                isRegisteredResult.observe(this@SplashActivity, Observer {
 
-                    val event = openActivityEvent.value ?: return@Observer
-
-                    val transitionData = event.getContentIfNotHandled() ?: return@Observer
-
-                    openActivity(transitionData.destinationActivityClass)
+                    when (it) {
+                        is Result.Success -> succeedToCheckIfRegistered(it.data)
+                        is Result.Error -> failToCheckIfRegistered(it.exception)
+                    }
                 })
             }
         }
 
         Handler().postDelayed({
-            splashViewModel.activateOpenActivityEvent()
+            splashViewModel.checkIfRegistered()
         }, 800)
     }
 
-    private fun <T : Activity> openActivity(activityClass: Class<T>) {
-        val intent = Intent(this, activityClass)
+    private fun succeedToCheckIfRegistered(isRegistered: Boolean) {
+
+        val destinationActivityClass = if (isRegistered) {
+            LoginActivity::class.java
+        } else {
+            RegisterActivity::class.java
+        }
+
+        openActivity(destinationActivityClass)
+    }
+
+    private fun failToCheckIfRegistered(e: Exception) {
+        Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun <T : Activity> openActivity(destinationActivityClass: Class<T>) {
+        val intent = Intent(this, destinationActivityClass)
         startActivity(intent)
         finish()
     }
