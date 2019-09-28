@@ -42,11 +42,8 @@ internal class AdminRepository(private val adminDao: AdminDao) {
         val result = HashUtil.match(rawPassword, admin.password)
 
         return if (result) {
-
             Result.Success(admin)
-
         } else {
-
             Result.Error(Exception("$name のパスワードが間違っています"))
         }
     }
