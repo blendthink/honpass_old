@@ -32,21 +32,20 @@ internal class AdminRepository(private val adminDao: AdminDao) {
 
     suspend fun login(name: String = "default", rawPassword: String) {
 
-        val admin = adminDao.find(name)
-
-        val password = HashUtil.encode(rawPassword)
+        val password = adminDao.find(name)?.password ?: return
 
         val result = HashUtil.match(rawPassword, password)
 
         if (result) {
 
             // TODO: Adminをメモリ上に保存する
-            Log.d("ログイン成功", admin.password)
+            Log.d("ログイン成功", password)
 
         } else {
 
-            Log.d("ログイン失敗", admin.password)
+            Log.d("ログイン失敗", password)
         }
-
     }
+
+    suspend fun isRegistered(name: String = "default"): Boolean = adminDao.find(name) != null
 }

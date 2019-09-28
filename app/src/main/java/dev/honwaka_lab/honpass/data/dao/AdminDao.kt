@@ -12,5 +12,5 @@ internal interface AdminDao {
     suspend fun insert(admin: Admin)
 
     @Query("SELECT * FROM admins WHERE name = :name")
-    suspend fun find(name: String): Admin
+    suspend fun find(name: String): Admin?
 }
