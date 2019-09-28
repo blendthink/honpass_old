@@ -20,9 +20,6 @@ internal object KoinModule {
                 "honpass.db"
             ).build()
         }
-    }
-
-    fun splashModule() = module {
 
         factory {
             get<HonpassDatabase>().adminDao()
@@ -31,6 +28,9 @@ internal object KoinModule {
         single {
             AdminRepository(get())
         }
+    }
+
+    fun splashModule() = module {
 
         viewModel {
             SplashViewModel(get())
@@ -38,14 +38,6 @@ internal object KoinModule {
     }
 
     fun registerModule() = module {
-
-        factory {
-            get<HonpassDatabase>().adminDao()
-        }
-
-        single {
-            AdminRepository(get())
-        }
 
         viewModel {
             RegisterViewModel(get())
