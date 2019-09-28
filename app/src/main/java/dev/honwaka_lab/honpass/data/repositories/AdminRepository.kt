@@ -1,7 +1,6 @@
 package dev.honwaka_lab.honpass.data.repositories
 
 import android.database.sqlite.SQLiteConstraintException
-import android.util.Log
 import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.dao.AdminDao
 import dev.honwaka_lab.honpass.data.entities.Admin
@@ -30,22 +29,38 @@ internal class AdminRepository(private val adminDao: AdminDao) {
         }
     }
 
-    suspend fun login(name: String = "default", rawPassword: String) {
+    suspend fun login(name: String = "default", rawPassword: String): Result<Admin> {
 
-        val password = adminDao.find(name)?.password ?: return
+        val admin = try {
+            adminDao.find(name)
+        } catch (e: SQLiteConstraintException) {
+            return Result.Error(e)
+        }
 
-        val result = HashUtil.match(rawPassword, password)
+        admin ?: return Result.Error(Exception("$name は登録されていません"))
 
-        if (result) {
+        val result = HashUtil.match(rawPassword, admin.password)
 
-            // TODO: Adminをメモリ上に保存する
-            Log.d("ログイン成功", password)
+        return if (result) {
+
+            Result.Success(admin)
 
         } else {
 
-            Log.d("ログイン失敗", password)
+            Result.Error(Exception("$name のパスワードが間違っています"))
         }
     }
 
-    suspend fun isRegistered(name: String = "default"): Boolean = adminDao.find(name) != null
+    suspend fun isRegistered(name: String = "default"): Result<Unit> {
+
+        val admin = try {
+            adminDao.find(name)
+        } catch (e: SQLiteConstraintException) {
+            return Result.Error(e)
+        }
+
+        admin ?: return Result.Error(Exception("$name は登録されていません"))
+
+        return Result.Success(Unit)
+    }
 }

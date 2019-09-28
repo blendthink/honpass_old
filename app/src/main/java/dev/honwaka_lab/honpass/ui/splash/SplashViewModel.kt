@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.honwaka_lab.honpass.convenience.Event
+import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
 import dev.honwaka_lab.honpass.ui.login.LoginActivity
 import dev.honwaka_lab.honpass.ui.register.RegisterActivity
@@ -25,14 +26,13 @@ internal class SplashViewModel(
 
         viewModelScope.launch {
 
-            val isRegistered = withContext(Dispatchers.IO) {
+            val result = withContext(Dispatchers.IO) {
                 adminRepository.isRegistered()
             }
 
-            val destinationActivityClass = if (isRegistered) {
-                LoginActivity::class.java
-            } else {
-                RegisterActivity::class.java
+            val destinationActivityClass = when (result) {
+                is Result.Success -> LoginActivity::class.java
+                is Result.Error -> RegisterActivity::class.java
             }
 
             _openActivityEvent.value = Event(TransitionData(destinationActivityClass))
