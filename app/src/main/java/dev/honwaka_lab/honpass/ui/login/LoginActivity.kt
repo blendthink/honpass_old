@@ -1,61 +1,60 @@
 package dev.honwaka_lab.honpass.ui.login
 
-import android.app.Activity
-import androidx.lifecycle.Observer
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import dev.honwaka_lab.honpass.R
+import dev.honwaka_lab.honpass.data.entities.Admin
+import dev.honwaka_lab.honpass.databinding.ActivityLoginBinding
+import org.koin.android.ext.android.inject
+import java.lang.Exception
 
 internal class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel by inject<LoginViewModel>()
+
+    private lateinit var inputMethodManager: InputMethodManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_login)
+        inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-        val username = findViewById<EditText>(R.id.username)
-        val password = findViewById<EditText>(R.id.password)
-        val login = findViewById<Button>(R.id.login)
-        val loading = findViewById<ProgressBar>(R.id.loading)
+        DataBindingUtil.setContentView<ActivityLoginBinding>(
+            this, R.layout.activity_login
+        ).apply {
 
-        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
-            val loginState = it ?: return@Observer
+            lifecycleOwner = this@LoginActivity
 
-            // disable login button unless both username / password is valid
-            login.isEnabled = loginState.isDataValid
+            viewModel = loginViewModel.apply {
 
-            if (loginState.usernameError != null) {
-                username.error = getString(loginState.usernameError)
             }
-            if (loginState.passwordError != null) {
-                password.error = getString(loginState.passwordError)
-            }
-        })
-
-        loginViewModel.loginResult.observe(this@LoginActivity, Observer {
-            val loginResult = it ?: return@Observer
-
-            loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
-            }
-            setResult(Activity.RESULT_OK)
-
-            //Complete and destroy login activity once successful
-            finish()
-        })
+        }
     }
 
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    private fun succeedToLogin(admin: Admin) {
+
+        // TODO admin をメモリ上に保存する
+
+        // TODO 遷移先を変更する
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun failToLogin(e: Exception) {
+        Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun clearFocus() {
+        currentFocus?.clearFocus()
+    }
+
+    private fun hideKeyboard() {
+        inputMethodManager.hideSoftInputFromWindow(window.decorView.windowToken, 0)
     }
 }

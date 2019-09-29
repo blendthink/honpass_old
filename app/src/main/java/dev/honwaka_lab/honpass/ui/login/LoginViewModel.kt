@@ -10,7 +10,9 @@ import dev.honwaka_lab.honpass.data.repositories.AdminRepository
 import dev.honwaka_lab.honpass.ui.login.model.LoginFormState
 import dev.honwaka_lab.honpass.ui.login.model.LoginResult
 
-internal class LoginViewModel(private val adminRepository: AdminRepository) : ViewModel() {
+internal class LoginViewModel(
+    private val adminRepository: AdminRepository
+) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm

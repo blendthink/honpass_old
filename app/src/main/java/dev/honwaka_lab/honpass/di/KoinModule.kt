@@ -3,6 +3,7 @@ package dev.honwaka_lab.honpass.di
 import androidx.room.Room
 import dev.honwaka_lab.honpass.data.HonpassDatabase
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
+import dev.honwaka_lab.honpass.ui.login.LoginViewModel
 import dev.honwaka_lab.honpass.ui.register.RegisterViewModel
 import dev.honwaka_lab.honpass.ui.splash.SplashViewModel
 import org.koin.android.ext.koin.androidContext
@@ -41,6 +42,13 @@ internal object KoinModule {
 
         viewModel {
             RegisterViewModel(get())
+        }
+    }
+
+    fun loginModule() = module {
+
+        viewModel {
+            LoginViewModel(get())
         }
     }
 }
