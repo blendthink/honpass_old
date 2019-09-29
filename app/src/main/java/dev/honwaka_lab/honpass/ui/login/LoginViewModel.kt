@@ -32,9 +32,8 @@ internal class LoginViewModel(
 
         formState.value = LoginFormState()
 
-        // TODO 後から処理を修正
         val observerFormState = Observer<String> {
-            formState.value = LoginFormState()
+            formState.value = LoginFormState.newInstance(password.value)
         }
 
         formState.addSource(password, observerFormState)

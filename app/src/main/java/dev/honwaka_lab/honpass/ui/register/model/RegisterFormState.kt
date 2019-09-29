@@ -8,6 +8,7 @@ internal data class RegisterFormState(
 
     companion object {
 
+        // TODO 後々、init()で判別してインスタンス化するように修正する
         fun newInstance(password: String?, passwordForConfirm: String?): RegisterFormState {
 
             val passwordError = updatePasswordError(password)
