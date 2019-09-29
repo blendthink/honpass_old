@@ -12,8 +12,11 @@ import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.databinding.ActivityLoginBinding
+import dev.honwaka_lab.honpass.di.KoinModule
 import dev.honwaka_lab.honpass.ui.main.MainActivity
 import org.koin.android.ext.android.inject
+import org.koin.core.context.loadKoinModules
+import org.koin.dsl.module
 import java.lang.Exception
 
 internal class LoginActivity : AppCompatActivity() {
@@ -54,9 +57,12 @@ internal class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun succeedToLogin(admin: Admin) {
+    private fun succeedToLogin(loggedInAdmin: Admin) {
 
-        // TODO admin をメモリ上に保存する
+        // TODO 場所をMainActivityへ
+        loadKoinModules(
+            KoinModule.mainModule(loggedInAdmin)
+        )
 
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

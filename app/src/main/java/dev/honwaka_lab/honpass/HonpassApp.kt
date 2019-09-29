@@ -16,8 +16,7 @@ internal class HonpassApp : Application() {
                 KoinModule.appModule(),
                 KoinModule.splashModule(),
                 KoinModule.registerModule(),
-                KoinModule.loginModule(),
-                KoinModule.mainModule()
+                KoinModule.loginModule()
             ))
         }
     }
