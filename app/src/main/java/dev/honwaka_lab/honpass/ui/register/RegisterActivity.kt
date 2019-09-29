@@ -66,7 +66,7 @@ internal class RegisterActivity : AppCompatActivity() {
     }
 
     private fun failToRegister(e: Exception) {
-        Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
     }
 
     private fun clearFocus() {
