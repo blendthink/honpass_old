@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import dev.honwaka_lab.honpass.R
+import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.databinding.ActivityLoginBinding
+import dev.honwaka_lab.honpass.ui.main.MainActivity
 import org.koin.android.ext.android.inject
 import java.lang.Exception
 
@@ -35,7 +37,10 @@ internal class LoginActivity : AppCompatActivity() {
 
                 result.observe(this@LoginActivity, Observer {
 
-                    // TODO 結果で処理を分ける
+                    when (it) {
+                        is Result.Success -> succeedToLogin(it.data)
+                        is Result.Error -> failToLogin(it.exception)
+                    }
                 })
 
                 clearFocusEvent.observe(this@LoginActivity, Observer {
@@ -53,8 +58,7 @@ internal class LoginActivity : AppCompatActivity() {
 
         // TODO admin をメモリ上に保存する
 
-        // TODO 遷移先を変更する
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
