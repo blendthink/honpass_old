@@ -13,7 +13,7 @@ import android.widget.Toast
 
 import dev.honwaka_lab.honpass.R
 
-class LoginActivity : AppCompatActivity() {
+internal class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
 
