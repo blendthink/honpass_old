@@ -1,50 +1,77 @@
 package dev.honwaka_lab.honpass.ui.login
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import android.util.Patterns
-
-import dev.honwaka_lab.honpass.R
+import android.view.View
+import androidx.lifecycle.*
+import dev.honwaka_lab.honpass.convenience.Event
+import dev.honwaka_lab.honpass.convenience.Result
+import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
 import dev.honwaka_lab.honpass.ui.login.model.LoginFormState
-import dev.honwaka_lab.honpass.ui.login.model.LoginResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 internal class LoginViewModel(
     private val adminRepository: AdminRepository
 ) : ViewModel() {
 
-    private val _loginForm = MutableLiveData<LoginFormState>()
-    val loginFormState: LiveData<LoginFormState> = _loginForm
+    val password = MutableLiveData<String>()
 
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> = _loginResult
+    val formState = MediatorLiveData<LoginFormState>()
 
-    fun login(username: String, password: String) {
+    private val _result = MutableLiveData<Result<Admin>>()
+    val result: LiveData<Result<Admin>> = _result
+
+    private val _hideKeyboardEvent = MutableLiveData<Event<Unit>>()
+    val hideKeyboardEvent: LiveData<Event<Unit>> = _hideKeyboardEvent
+
+    private val _clearFocusEvent = MutableLiveData<Event<Unit>>()
+    val clearFocusEvent: LiveData<Event<Unit>> = _clearFocusEvent
+
+    init {
+
+        formState.value = LoginFormState()
+
+        // TODO 後から処理を修正
+        val observerFormState = Observer<String> {
+            formState.value = LoginFormState()
+        }
+
+        formState.addSource(password, observerFormState)
     }
 
-    fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
-            _loginForm.value =
-                LoginFormState(usernameError = R.string.invalid_username)
-        } else if (!isPasswordValid(password)) {
-            _loginForm.value =
-                LoginFormState(passwordError = R.string.invalid_password)
-        } else {
-            _loginForm.value =
-                LoginFormState(isDataValid = true)
+    fun submit(view: View) {
+
+        clearFocus(view)
+
+        hideKeyboard()
+
+        val passwordValue = password.value
+            ?: throw RuntimeException("入力ミスを防げていません")
+
+        viewModelScope.launch {
+
+            _result.value = withContext(Dispatchers.IO) {
+                adminRepository.login(rawPassword = passwordValue)
+            }
         }
     }
 
-    private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-        } else {
-            username.isNotBlank()
-        }
+    fun clickScreen(view: View) {
+
+        clearFocus(view)
+
+        hideKeyboard()
     }
 
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5;
+    private fun clearFocus(view: View) {
+
+        view.requestFocus()
+
+        _clearFocusEvent.value = Event(Unit)
+    }
+
+    private fun hideKeyboard() {
+        _hideKeyboardEvent.value = Event(Unit)
     }
 }

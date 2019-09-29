@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.databinding.ActivityLoginBinding
@@ -32,6 +33,18 @@ internal class LoginActivity : AppCompatActivity() {
 
             viewModel = loginViewModel.apply {
 
+                result.observe(this@LoginActivity, Observer {
+
+                    // TODO 結果で処理を分ける
+                })
+
+                clearFocusEvent.observe(this@LoginActivity, Observer {
+                    clearFocus()
+                })
+
+                hideKeyboardEvent.observe(this@LoginActivity, Observer {
+                    hideKeyboard()
+                })
             }
         }
     }
