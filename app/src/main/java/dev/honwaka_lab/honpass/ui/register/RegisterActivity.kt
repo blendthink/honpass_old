@@ -2,22 +2,21 @@ package dev.honwaka_lab.honpass.ui.register
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.databinding.ActivityRegisterBinding
 import dev.honwaka_lab.honpass.ui.login.LoginActivity
-import org.koin.android.ext.android.inject
-import java.lang.Exception
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class RegisterActivity : AppCompatActivity() {
 
-    private val registerViewModel by inject<RegisterViewModel>()
+    private val registerViewModel by viewModel<RegisterViewModel>()
 
     private lateinit var inputMethodManager: InputMethodManager
 

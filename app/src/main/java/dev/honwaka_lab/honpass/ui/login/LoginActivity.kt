@@ -14,14 +14,12 @@ import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.databinding.ActivityLoginBinding
 import dev.honwaka_lab.honpass.di.KoinModule
 import dev.honwaka_lab.honpass.ui.main.MainActivity
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
-import org.koin.dsl.module
-import java.lang.Exception
 
 internal class LoginActivity : AppCompatActivity() {
 
-    private val loginViewModel by inject<LoginViewModel>()
+    private val loginViewModel by viewModel<LoginViewModel>()
 
     private lateinit var inputMethodManager: InputMethodManager
 
