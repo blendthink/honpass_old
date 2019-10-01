@@ -4,13 +4,17 @@ import androidx.room.Room
 import dev.honwaka_lab.honpass.data.HonpassDatabase
 import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
+import dev.honwaka_lab.honpass.ui.login.LoginActivity
 import dev.honwaka_lab.honpass.ui.login.LoginViewModel
 import dev.honwaka_lab.honpass.ui.main.MainActivity
 import dev.honwaka_lab.honpass.ui.main.MainViewModel
+import dev.honwaka_lab.honpass.ui.register.RegisterActivity
 import dev.honwaka_lab.honpass.ui.register.RegisterViewModel
+import dev.honwaka_lab.honpass.ui.splash.SplashActivity
 import dev.honwaka_lab.honpass.ui.splash.SplashViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import org.koin.ext.getFullName
 
@@ -35,35 +39,46 @@ internal object KoinModule {
         }
     }
 
+    fun loggedInModule(loggedInAdmin: Admin) = module {
+
+        single {
+            loggedInAdmin
+        }
+    }
+
     fun splashModule() = module {
 
-        viewModel {
-            SplashViewModel(get())
+        scope(named<SplashActivity>()) {
+            viewModel {
+                SplashViewModel(get())
+            }
         }
     }
 
     fun registerModule() = module {
 
-        viewModel {
-            RegisterViewModel(get())
+        scope(named<RegisterActivity>()) {
+            viewModel {
+                RegisterViewModel(get())
+            }
         }
     }
 
     fun loginModule() = module {
 
-        viewModel {
-            LoginViewModel(get())
+        scope(named<LoginActivity>()) {
+            viewModel {
+                LoginViewModel(get())
+            }
         }
     }
 
-    fun mainModule(loggedInAdmin: Admin) = module {
+    fun mainModule() = module {
 
-        single {
-            loggedInAdmin
-        }
-
-        viewModel {
-            MainViewModel()
+        scope(named<MainActivity>()) {
+            viewModel {
+                MainViewModel()
+            }
         }
     }
 }

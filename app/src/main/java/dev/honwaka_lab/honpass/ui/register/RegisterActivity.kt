@@ -12,11 +12,12 @@ import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.databinding.ActivityRegisterBinding
 import dev.honwaka_lab.honpass.ui.login.LoginActivity
+import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class RegisterActivity : AppCompatActivity() {
 
-    private val registerViewModel by viewModel<RegisterViewModel>()
+    private val registerViewModel by currentScope.viewModel<RegisterViewModel>(this)
 
     private lateinit var inputMethodManager: InputMethodManager
 

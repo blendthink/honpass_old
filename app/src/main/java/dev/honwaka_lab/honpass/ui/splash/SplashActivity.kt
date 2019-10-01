@@ -13,12 +13,12 @@ import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.databinding.ActivitySplashBinding
 import dev.honwaka_lab.honpass.ui.login.LoginActivity
 import dev.honwaka_lab.honpass.ui.register.RegisterActivity
-import org.koin.android.ext.android.inject
+import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class SplashActivity : AppCompatActivity() {
 
-    private val splashViewModel by viewModel<SplashViewModel>()
+    private val splashViewModel by currentScope.viewModel<SplashViewModel>(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

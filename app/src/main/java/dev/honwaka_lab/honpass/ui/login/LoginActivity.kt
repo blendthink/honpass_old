@@ -14,12 +14,13 @@ import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.databinding.ActivityLoginBinding
 import dev.honwaka_lab.honpass.di.KoinModule
 import dev.honwaka_lab.honpass.ui.main.MainActivity
+import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
 internal class LoginActivity : AppCompatActivity() {
 
-    private val loginViewModel by viewModel<LoginViewModel>()
+    private val loginViewModel by currentScope.viewModel<LoginViewModel>(this)
 
     private lateinit var inputMethodManager: InputMethodManager
 
@@ -57,9 +58,8 @@ internal class LoginActivity : AppCompatActivity() {
 
     private fun succeedToLogin(loggedInAdmin: Admin) {
 
-        // TODO 場所をMainActivityへ
         loadKoinModules(
-            KoinModule.mainModule(loggedInAdmin)
+            KoinModule.loggedInModule(loggedInAdmin)
         )
 
         val intent = Intent(this, MainActivity::class.java)
