@@ -16,7 +16,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import org.koin.ext.getFullName
 
 internal object KoinModule {
 
@@ -41,8 +40,10 @@ internal object KoinModule {
 
     fun loggedInModule(loggedInAdmin: Admin) = module {
 
-        single {
-            loggedInAdmin
+        scope(named<MainActivity>()) {
+            scoped {
+                loggedInAdmin
+            }
         }
     }
 
