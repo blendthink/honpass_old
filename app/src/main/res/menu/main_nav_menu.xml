@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+
+    <group android:id="@+id/main_nav_menu_first">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@android:drawable/ic_menu_delete"
+            android:title="Delete" />
+
+        <item
+            android:id="@+id/nav_delete"
+            android:icon="@android:drawable/ic_menu_delete"
+            android:title="Delete" />
+
+    </group>
+
+    <group android:id="@+id/main_nav_menu_second">
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@android:drawable/ic_menu_set_as"
+            android:title="アプリについて" />
+
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="フィードバック" />
+
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="ヘルプ" />
+
+    </group>
+
+</menu>
