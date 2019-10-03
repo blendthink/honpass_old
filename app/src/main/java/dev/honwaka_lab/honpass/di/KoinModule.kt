@@ -4,6 +4,8 @@ import androidx.room.Room
 import dev.honwaka_lab.honpass.data.HonpassDatabase
 import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
+import dev.honwaka_lab.honpass.ui.account.AddAccountActivity
+import dev.honwaka_lab.honpass.ui.account.AddAccountViewModel
 import dev.honwaka_lab.honpass.ui.login.LoginActivity
 import dev.honwaka_lab.honpass.ui.login.LoginViewModel
 import dev.honwaka_lab.honpass.ui.main.MainActivity
@@ -79,6 +81,15 @@ internal object KoinModule {
         scope(named<MainActivity>()) {
             viewModel {
                 MainViewModel()
+            }
+        }
+    }
+
+    fun addAccountModule() = module {
+
+        scope(named<AddAccountActivity>()) {
+            viewModel {
+                AddAccountViewModel()
             }
         }
     }
