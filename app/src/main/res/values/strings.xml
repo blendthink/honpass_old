@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ほんパス</string>
+
+    <!--  MainActivity の NavigationView の Menu  -->
+    <string name="main_nav_menu_title_app_info">アプリについて</string>
+    <string name="main_nav_menu_title_developer_info">開発者について</string>
+    <string name="main_nav_menu_title_feedback">フィードバック</string>
+    <string name="main_nav_menu_title_license">オープンソースライセンス</string>
+    
 </resources>

@@ -5,36 +5,31 @@
     tools:showIn="navigation_view"
     >
 
-    <group android:id="@+id/main_nav_menu_first">
+    <group android:id="@+id/main_nav_menu_group_info">
 
         <item
-            android:id="@+id/nav_delete"
-            android:icon="@drawable/ic_info"
-            android:title="アプリについて" />
+            android:id="@+id/main_nav_menu_app_info"
+            android:icon="@drawable/ic_app_info"
+            android:title="@string/main_nav_menu_title_app_info" />
 
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_person"
-            android:title="開発者について" />
+            android:id="@+id/main_nav_menu_developer_info"
+            android:icon="@drawable/ic_developer_info"
+            android:title="@string/main_nav_menu_title_developer_info" />
 
     </group>
 
-    <group android:id="@+id/main_nav_menu_second">
+    <group android:id="@+id/main_nav_menu_group_other">
 
         <item
-            android:id="@+id/nav_feedback"
-            android:icon="@drawable/ic_help"
-            android:title="ヘルプ" />
-
-        <item
-            android:id="@+id/nav_help"
+            android:id="@+id/main_nav_menu_feedback"
             android:icon="@drawable/ic_feedback"
-            android:title="フィードバック" />
+            android:title="@string/main_nav_menu_title_feedback" />
 
         <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_local_library"
-            android:title="オープンソースライセンス" />
+            android:id="@+id/main_nav_menu_license"
+            android:icon="@drawable/ic_license"
+            android:title="@string/main_nav_menu_title_license" />
 
     </group>
 
