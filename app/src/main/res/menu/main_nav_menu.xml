@@ -8,33 +8,33 @@
     <group android:id="@+id/main_nav_menu_first">
 
         <item
-            android:id="@+id/nav_home"
-            android:icon="@android:drawable/ic_menu_delete"
-            android:title="Delete" />
+            android:id="@+id/nav_delete"
+            android:icon="@drawable/ic_info"
+            android:title="アプリについて" />
 
         <item
-            android:id="@+id/nav_delete"
-            android:icon="@android:drawable/ic_menu_delete"
-            android:title="Delete" />
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_person"
+            android:title="開発者について" />
 
     </group>
 
     <group android:id="@+id/main_nav_menu_second">
 
         <item
-            android:id="@+id/nav_setting"
-            android:icon="@android:drawable/ic_menu_set_as"
-            android:title="アプリについて" />
-
-        <item
             android:id="@+id/nav_feedback"
-            android:icon="@android:drawable/ic_menu_add"
-            android:title="フィードバック" />
+            android:icon="@drawable/ic_help"
+            android:title="ヘルプ" />
 
         <item
             android:id="@+id/nav_help"
-            android:icon="@android:drawable/ic_menu_help"
-            android:title="ヘルプ" />
+            android:icon="@drawable/ic_feedback"
+            android:title="フィードバック" />
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_local_library"
+            android:title="オープンソースライセンス" />
 
     </group>
 
