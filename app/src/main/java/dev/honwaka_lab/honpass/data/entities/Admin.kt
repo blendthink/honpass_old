@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
         Index(name = "index_admins_name_password", value = ["name"], unique = true)
     ]
 )
-internal data class Admin (
+internal data class Admin(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val guid: String,

@@ -1,6 +1,9 @@
 package dev.honwaka_lab.honpass.ui.splash
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
 import kotlinx.coroutines.Dispatchers

@@ -1,7 +1,12 @@
 package dev.honwaka_lab.honpass.ui.register
 
 import android.view.View
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.honwaka_lab.honpass.convenience.Event
 import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.repositories.AdminRepository
@@ -33,7 +38,8 @@ internal class RegisterViewModel(
         formState.value = RegisterFormState()
 
         val observerFormState = Observer<String> {
-            formState.value = RegisterFormState.newInstance(password.value, passwordForConfirm.value)
+            formState.value =
+                RegisterFormState.newInstance(password.value, passwordForConfirm.value)
         }
 
         formState.addSource(password, observerFormState)

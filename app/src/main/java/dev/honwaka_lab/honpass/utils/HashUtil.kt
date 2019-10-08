@@ -1,7 +1,7 @@
 package dev.honwaka_lab.honpass.utils
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import java.security.SecureRandom
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 internal class HashUtil private constructor() {
 

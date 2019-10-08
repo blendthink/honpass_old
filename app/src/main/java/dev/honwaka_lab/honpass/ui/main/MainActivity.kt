@@ -12,11 +12,11 @@ import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.databinding.ActivityMainBinding
 import dev.honwaka_lab.honpass.ui.account.AddAccountActivity
+import kotlin.math.max
 import kotlinx.android.synthetic.main.main_app_bar.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.max
 
 internal class MainActivity : AppCompatActivity() {
 
@@ -83,7 +83,6 @@ internal class MainActivity : AppCompatActivity() {
             }.start()
 
             openAddAccountActivity()
-
         }, 300)
     }
 
@@ -95,11 +94,10 @@ internal class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
             overridePendingTransition(R.anim.none, R.anim.none)
-
         }, 300)
     }
 
-    private fun getFabSize() : Float {
+    private fun getFabSize(): Float {
         return resources.getDimension(R.dimen.fab_size)
     }
 }

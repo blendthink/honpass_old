@@ -5,7 +5,7 @@ import dev.honwaka_lab.honpass.convenience.Result
 import dev.honwaka_lab.honpass.data.dao.AdminDao
 import dev.honwaka_lab.honpass.data.entities.Admin
 import dev.honwaka_lab.honpass.utils.HashUtil
-import java.util.*
+import java.util.UUID
 
 internal class AdminRepository(private val adminDao: AdminDao) {
 
@@ -22,7 +22,6 @@ internal class AdminRepository(private val adminDao: AdminDao) {
             adminDao.insert(admin)
 
             Result.Success(Unit)
-
         } catch (e: SQLiteConstraintException) {
 
             Result.Error(e)
