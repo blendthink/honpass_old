@@ -18,6 +18,7 @@ buildscript {
             'coroutines': '1.2.2',
             'koin': '2.0.1',
             'springSecurityCore': '5.1.6.RELEASE',
+            'ktlint': '0.34.2',
     ]
 
     repositories {

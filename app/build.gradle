@@ -47,6 +47,10 @@ android {
     }
 }
 
+configurations {
+    ktlint
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
@@ -85,4 +89,22 @@ dependencies {
     testImplementation "junit:junit:${versions.junit}"
     androidTestImplementation "androidx.test:runner:${versions.runner}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espressoCore}"
+
+    // Lint
+    ktlint "com.pinterest:ktlint:${versions.ktlint}"
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "src/**/*.kt"
+}
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "-F", "src/**/*.kt"
 }
