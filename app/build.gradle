@@ -86,7 +86,7 @@ dependencies {
     implementation "org.springframework.security:spring-security-core:${versions.springSecurityCore}"
 
     // Test
-    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test.ext:junit-ktx:${versions.junit}"
     androidTestImplementation "androidx.test:runner:${versions.runner}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espressoCore}"
 
