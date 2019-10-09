@@ -17,6 +17,8 @@ jobs:
       with:
         ruby-version: '2.6'
         architecture: 'x64'
+    - name: unit test
+      run: ./gradlew testDebugUnitTest
     - name: install danger
       run: |
         gem install bundler
