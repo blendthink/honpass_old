@@ -8,6 +8,3 @@ checkstyle_format.base_path = Dir.pwd
 
 # ktlint
 checkstyle_format.report 'app/build/reports/ktlint/CheckKotlinCodeStyle.xml'
-
-# test
-checkstyle_format.report 'app/build/reports/test-results/testDebugUnitTest/*.xml'
