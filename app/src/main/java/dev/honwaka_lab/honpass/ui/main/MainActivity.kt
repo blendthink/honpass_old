@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewAnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
+import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.data.entities.Admin
@@ -44,60 +45,19 @@ internal class MainActivity : AppCompatActivity() {
     }
 
     private fun clickFab() {
-
-        Handler().postDelayed({
-
-            binding.mainAppBar.mainFab.elevation = 0f
-            binding.mainAppBar.mainFab.alpha = 0f
-
-            binding.mainReveal.visibility = View.VISIBLE
-            val cx = binding.mainReveal.width
-            val cy = binding.mainReveal.height
-
-            val fabSize = getFabSize()
-
-            val x = (fabSize / 2 + binding.mainAppBar.mainFab.x).toInt()
-            val y = (fabSize / 2 + binding.mainAppBar.mainFab.y).toInt()
-
-            val finalRadius = max(cx, cy) * 1.2f
-
-            ViewAnimationUtils.createCircularReveal(
-                binding.mainReveal, x, y, fabSize, finalRadius
-            ).apply {
-
-                duration = 500
-
-                doOnEnd {
-
-                    binding.mainReveal.visibility = View.INVISIBLE
-                    binding.mainAppBar.mainFab.elevation = 4f
-
-                    val params = binding.mainAppBar.mainFab.layoutParams
-                    params.width = fabSize.toInt()
-                    binding.mainAppBar.mainFab.requestLayout()
-
-                    Handler().postDelayed({
-                        binding.mainAppBar.mainFab.alpha = 1f
-                    }, 600)
-                }
-            }.start()
-
-            openAddAccountActivity()
-        }, 300)
+        openAddAccountActivity()
     }
 
     private fun openAddAccountActivity() {
 
         val intent = Intent(this, AddAccountActivity::class.java)
 
-        Handler().postDelayed({
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this,
+            main_fab,
+            "fab_transition"
+        )
 
-            startActivity(intent)
-            overridePendingTransition(R.anim.none, R.anim.none)
-        }, 300)
-    }
-
-    private fun getFabSize(): Float {
-        return resources.getDimension(R.dimen.fab_size)
+        startActivity(intent, options.toBundle())
     }
 }
