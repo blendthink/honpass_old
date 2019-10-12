@@ -47,12 +47,24 @@ internal class AddAccountActivity : AppCompatActivity() {
 
         binding.addAccountFab.postDelayed({
 
-            revealView(binding.addAccountLayout)
+            revealView(binding.addAccountLayout) {
+                binding.addAccountLayoutCover
+                    .animate()
+                    .setDuration(300)
+                    .alpha(0F)
+                    .start()
+            }
 
         }, 600)
     }
 
     override fun onBackPressed() {
+
+        binding.addAccountLayoutCover
+            .animate()
+            .setDuration(300)
+            .alpha(1F)
+            .start()
 
         hideView(binding.addAccountLayout) {
             super.onBackPressed()
@@ -97,7 +109,7 @@ internal class AddAccountActivity : AppCompatActivity() {
         )
     }
 
-    private fun revealView(view: View) {
+    private fun revealView(view: View, endAction: () -> Unit) {
 
         val centerY = view.measuredHeight / 2
         val centerX = view.measuredWidth / 2
@@ -107,6 +119,9 @@ internal class AddAccountActivity : AppCompatActivity() {
         ).apply {
             duration = 400
             startDelay = 0
+            doOnEnd {
+                endAction()
+            }
         }
 
         view.visibility = View.VISIBLE
