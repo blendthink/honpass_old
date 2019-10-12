@@ -37,7 +37,10 @@
             android:label="@string/app_name"
             />
 
-        <activity android:name=".ui.account.AddAccountActivity" />
+        <activity
+            android:name=".ui.account.AddAccountActivity"
+            android:theme="@style/AppTheme.Transparent"
+            />
 
     </application>
 
