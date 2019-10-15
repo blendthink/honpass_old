@@ -147,4 +147,9 @@ internal class AddAccountActivity : AppCompatActivity() {
 
         animator.start()
     }
+
+    @Suppress("UNUSED_PARAMETER")
+    fun back(view: View) {
+        onBackPressed()
+    }
 }
