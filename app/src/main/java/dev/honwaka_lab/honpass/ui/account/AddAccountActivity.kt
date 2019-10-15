@@ -10,6 +10,7 @@ import android.view.animation.AccelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import dev.honwaka_lab.honpass.R
 import dev.honwaka_lab.honpass.databinding.ActivityAddAcountBinding
 import dev.honwaka_lab.honpass.utils.DisplayUtil
@@ -31,9 +32,14 @@ internal class AddAccountActivity : AppCompatActivity() {
             this, R.layout.activity_add_acount
         ).apply {
 
-            lifecycleOwner = this@AddAccountActivity
+            viewModel = addAccountViewModel.apply {
 
-            viewModel = addAccountViewModel
+                lifecycleOwner = this@AddAccountActivity
+
+                otherClickEvent.observe(this@AddAccountActivity, Observer {
+                    this@AddAccountActivity.back()
+                })
+            }
         }
 
         binding.addAccountFab.postDelayed({
@@ -148,8 +154,7 @@ internal class AddAccountActivity : AppCompatActivity() {
         animator.start()
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    fun back(view: View) {
+    private fun back() {
         onBackPressed()
     }
 }
